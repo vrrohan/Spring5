@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="addr1" class="Address">
+		<constructor-arg value="sector 23" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="Noida" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="UP" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="201301" type="int"></constructor-arg>
+	</bean>
+	<bean id="pd1" class="PersonalDetails">
+		<constructor-arg value="Paul" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="Pogba" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="paul.fr@gmail.com" type="java.lang.String"></constructor-arg>
+	</bean>
+	<bean id="empl1" class="Employee">
+		<constructor-arg ref="pd1" type="PersonalDetails"></constructor-arg>
+		<constructor-arg ref="addr1" type="Address"></constructor-arg>
+		<constructor-arg value="Technical Lead" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="70000" type="int"></constructor-arg>
+	</bean>
+
+</beans>

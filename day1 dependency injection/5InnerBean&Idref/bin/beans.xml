@@ -1,0 +1,41 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="tri" class="Triangle">
+		<property name="pb" ref="pointB"></property>
+		<property name="pa">
+			<bean class="PointA">
+				<property name="Ax" value="-20"></property>
+				<property name="Ay" value="0"></property>
+			</bean>
+		</property>
+		<property name="pc">
+			<bean class="PointC">
+				<property name="Cx" value="20"></property>
+				<property name="Cy" value="0"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="pointB" class="PointB">
+		<property name="Bx" value="0"></property>
+		<property name="By" value="0"></property>
+	</bean>
+	
+	<bean id="cir" class="Circle">
+		<property name="pb" ref="pointB"></property>
+	</bean>
+	
+	<bean id="lin" class="Line">
+		<property name="pb" ref="pointB"></property>
+		<property name="pa">
+			<idref bean="pointA"/>
+		</property>
+	</bean>
+	
+	<alias name="cir" alias="myCircleAlias"/>
+	<!-- Here alias element has two attribute one is name and another is alias. name attribute has the value of id of which bean required to alias. alias attribute has the value what ever you want call as alias.
+		Here attribute name has the value “cir”(id of circle bean) and alias attribute has the value “myCircleAlias” and get this bean in our application as following way. -->
+
+</beans>

@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="addr1" class="Address">
+		<property name="streetNo" value="sector 23"></property>
+		<property name="city" value="Noida"></property>
+		<property name="state" value="UP"></property>
+		<property name="zipcode" value="201301"></property>
+	</bean>
+	<bean id="pd1" class="PersonalDetails">
+		<property name="firstName" value="Wayne"></property>
+		<property name="lastName" value="Rooney"></property>
+		<property name="email" value="wayne10@gmail.com"></property>
+	</bean>
+	<bean id="empl1" class="Employee">
+		<property name="personal" ref="pd1"></property>
+		<property name="address" ref="addr1"></property>
+		<property name="designation" value="Software Developer"></property>
+		<property name="salary" value="35000"></property>
+	</bean>
+
+</beans>
