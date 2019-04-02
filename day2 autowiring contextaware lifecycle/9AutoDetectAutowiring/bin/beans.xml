@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="dev" class="Developer" autowire="autodetect"></bean>
+
+	<bean id="lang" class="Language">
+		<property name="name" value="Java"></property>
+		<property name="framework" value="Spring5.0"></property>
+	</bean>
+	
+<!-- 	
+cvc-enumeration-valid: Value 'autodetect' is not facet-valid with respect to enumeration '[default, no, byName, byType, constructor]'. It must be a value from the enumeration.
+autodetect has been deprecated & used with schemas 2.0 or lower
+ -->	
+
+</beans>

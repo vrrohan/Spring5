@@ -1,0 +1,250 @@
+	In Spring, 5 Auto-wiring modes are supported.
+
+no – Default, no auto wiring, set it manually via “ref” attribute
+byName – Auto wiring by property name. If the name of a bean is same as the name of other bean property, auto wire it.
+byType – Auto wiring by property data type. If data type of a bean is compatible with the data type of other bean property, auto wire it.
+constructor – byType mode in constructor argument.
+autodetect – If a default constructor is found, use “autowired by constructor”; Otherwise, use “autowire by type”.
+
+public class Customer 
+{
+	private Person person;
+	
+	public Customer(Person person) {
+		this.person = person;
+	}
+	
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+}
+
+public class Person 
+{
+	//...
+}
+
+1. In Spring, “Autowiring by Name” means, if the name of a bean is same as the name of other bean property, auto wire it.
+
+For example, if a “customer” bean exposes an “address” property, Spring will find the “address” bean in current container and wire it automatically. And if no matching found, just do nothing.
+You can enable this feature via autowire="byName" like below :
+
+	<!-- customer has a property name "address" -->
+	<bean id="customer" class="com.mkyong.common.Customer" autowire="byName" />
+	
+	<bean id="address" class="com.mkyong.common.Address" >
+		<property name="fulladdress" value="Block A 888, CA" />
+	</bean>
+
+Two beans, customer and address.
+ 
+public class Customer 
+{
+	private Address address;
+}
+
+package com.mkyong.common;
+ 
+public class Address 
+{
+	private String fulladdress;
+}
+
+Normally, you wire the bean explicitly, via ref attribute like this :
+
+	<bean id="customer" class="com.mkyong.common.Customer" >
+		<property name="address" ref="address" />
+	</bean>
+	
+	<bean id="address" class="com.mkyong.common.Address" >
+		<property name="fulladdress" value="Block A 888, CA" />
+	</bean>
+
+Output:- Customer [address=Address [fulladdress=Block A 888, CA]]
+
+With autowire by name enabled, you do not need to declares the property tag anymore. As long as the “address” bean is same name as the property of “customer” bean, which is “address”, Spring will wire it automatically.
+
+	<bean id="customer" class="com.mkyong.common.Customer" autowire="byName" />
+
+	<bean id="address" class="com.mkyong.common.Address" >
+		<property name="fulladdress" value="Block A 888, CA" />
+	</bean>
+
+========================================================================================	
+2. In Spring, “Autowiring by Type” means, if data type of a bean is compatible with the data type of other bean property, auto wire it.
+
+For example, a “person” bean exposes a property with data type of “ability” class, Spring will find the bean with same data type of class “ability” and wire it automatically. And if no matching found, just do nothing.
+
+You can enable this feature via autowire="byType" like below :
+
+	<!-- person has a property type of class "ability" -->
+	<bean id="person" class="com.mkyong.common.Person" autowire="byType" />
+		
+	<bean id="invisible" class="com.mkyong.common.Ability" >
+		<property name="skill" value="Invisible" />
+	</bean>
+
+public class Person 
+{
+	private Ability ability;
+	//getters & setters
+}
+ 
+public class Ability 
+{
+	private String skill;
+	//getters & setters
+}
+
+Normally, you wire the bean explicitly :
+
+	<bean id="person" class="com.mkyong.common.Person">
+		<property name="ability" ref="invisible" />
+	</bean>
+	
+	<bean id="invisible" class="com.mkyong.common.Ability" >
+		<property name="skill" value="Invisible" />
+	</bean>
+
+Output:- Person [ability=Ability [skill=Invisible]]
+
+With autowire by type enabled, you can leave the ability property unset. Spring will find the same data type and wire it automatcailly.
+
+	<bean id="person" class="com.mkyong.common.Person" autowire="byType" />
+	
+	<bean id="invisible" class="com.mkyong.common.Ability" >
+		<property name="skill" value="Invisible" />
+	</bean>
+
+Output:- Person [ability=Ability [skill=Invisible]]
+
+Wait, what if you have two beans with same data type of class “ability”?
+
+	<bean id="person" class="com.mkyong.common.Person" autowire="byType" />
+	
+	<bean id="steal" class="com.mkyong.common.Ability" >
+		<property name="skill" value="Steal" />
+	</bean>
+	
+	<bean id="invisible" class="com.mkyong.common.Ability" >
+		<property name="skill" value="Invisible" />
+	</bean>
+
+Output:- Exception in thread "main" org.springframework.beans.factory.UnsatisfiedDependencyException: 
+
+No unique bean of type [com.mkyong.common.Ability] is defined: 
+expected single matching bean but found 2: [steal, invisible]; nested exception is 
+org.springframework.beans.factory.NoSuchBeanDefinitionException: 
+No unique bean of type [com.mkyong.common.Ability] is defined: 
+expected single matching bean but found 2: [steal, invisible]
+
+In this case, you will hit the UnsatisfiedDependencyException error message.
+
+Note:- In autowiring by type mode, you just have to make sure only one unique data type of bean is declared.
+
+=============================================================================
+3. In Spring, “Autowiring by Constructor” is actually autowiring by Type in constructor argument. It means, if data type of a bean is same as the data type of other bean constructor argument, auto wire it.
+
+
+public class Developer {
+	private Language language;
+
+	//autowire by constructor
+	public Developer(Language language) {
+		this.language = language;
+	}
+
+	//...
+}
+
+public class Language {
+	private String name;
+	//...
+}
+ 
+Normally, you wire the bean via constructor like this :
+
+	<bean id="developer" class="com.mkyong.common.Developer">
+		<constructor-arg>
+			<ref bean="language" />
+		</constructor-arg>
+	</bean>
+		
+	<bean id="language" class="com.mkyong.common.Language" >
+		<property name="name" value="Java" />
+	</bean>
+
+Output:- Developer [language=Language [name=Java]]
+
+With autowire by constructor enabled, you can leave the constructor property unset. Spring will find the compatible data type and wire it automatcailly.
+
+	<bean id="developer" class="com.mkyong.common.Developer" autowire="constructor" />
+		
+	<bean id="language" class="com.mkyong.common.Language" >
+		<property name="name" value="Java" />
+	</bean>
+
+Output:- Developer [language=Language [name=Java]]
+
+================================================================================================
+
+4. In Spring, “Autowiring by AutoDetect“, means chooses “autowire by constructor” if default constructor (argument with any data type), otherwise uses “autowire by type“.
+
+Auto wiring the “kungfu” bean into “panda”, via constructor or type (base on the implementation of panda bean).
+
+	<bean id="panda" class="com.mkyong.common.Panda" autowire="autodetect" />
+		
+	<bean id="kungfu" class="com.mkyong.common.KungFu" >
+		<property name="name" value="Shao lin" />
+	</bean>
+	
+1. AutoDetect – by Constructor
+If a default constructor is supplied, auto detect will chooses wire by constructor.
+
+public class Panda {
+	private KungFu kungfu;
+
+	public Panda(KungFu kungfu) {
+		System.out.println("autowiring by constructor");
+		this.kungfu = kungfu;
+	}
+
+	public KungFu getKungfu() {
+		return kungfu;
+	}
+
+	public void setKungfu(KungFu kungfu) {
+		System.out.println("autowiring by type");
+		this.kungfu = kungfu;
+	}
+
+	//...
+}
+
+Output:-
+autowiring by constructor
+Person [kungfu=Language [name=Shao lin]]
+ 
+2. AutoDetect – by Type
+If a default constructor is not found, auto detect will chooses wire by type.
+
+public class Panda {
+	private KungFu kungfu;
+
+	public KungFu getKungfu() {
+		return kungfu;
+	}
+
+	public void setKungfu(KungFu kungfu) {
+		System.out.println("autowiring by type");
+		this.kungfu = kungfu;
+	}
+
+	//...
+}
+
+Output:-
+autowiring by type
+Person [kungfu=Language [name=Shao lin]]
+

@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="per" class="Person" scope="singleton">
+		<property name="name" value="Paul"></property>
+		<property name="age" value="25"></property>
+	</bean>
+	
+	<bean id="protoPer" class="Person" scope="prototype">
+		<property name="name" value="wayne"></property>
+		<property name="age" value="33"></property>
+	</bean>
+</beans>

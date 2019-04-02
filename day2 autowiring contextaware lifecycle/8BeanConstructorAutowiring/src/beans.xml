@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="dev" class="Developer" autowire="constructor">
+		<constructor-arg type="java.lang.String" value="James Gosling"></constructor-arg>
+	</bean>
+
+	<bean id="lang" class="Language">
+		<property name="name" value="Java"></property>
+		<property name="framework" value="Spring5.0"></property>
+	</bean>
+
+	<!-- If we mention this also - <bean id="lang2" class="Language"> <property 
+		name="name" value="Python"></property> <property name="framework" value="Django"></property> 
+		</bean> Exception:- Unsatisfied dependency expressed through constructor 
+		parameter 0; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: 
+		No qualifying bean of type 'Language' available: expected single matching 
+		bean but found 2: lang,lang2 -->
+
+</beans>
