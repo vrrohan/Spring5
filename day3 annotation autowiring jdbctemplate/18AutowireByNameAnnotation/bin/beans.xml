@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="cir" class="Circle">
+		<property name="radius" value="5"></property>
+	</bean>
+
+	<bean id="pointA" class="Point">
+		<property name="pX" value="0"></property>
+		<property name="pY" value="0"></property>
+	</bean>
+
+	<bean id="center" class="Point">
+		<property name="pX" value="-1"></property>
+		<property name="pY" value="-2"></property>
+	</bean>
+
+	<bean id="pointC" class="Point">
+		<property name="pX" value="-1"></property>
+		<property name="pY" value="2"></property>
+	</bean>
+
+	<bean id="pointD" class="Point">
+		<property name="pX" value="1"></property>
+		<property name="pY" value="-2"></property>
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean>
+
+	<!-- <bean id="rad2" class="Radius"> <property name="radii" value="8"></property> 
+		</bean> Exception Error - Unsatisfied dependency expressed through bean property 
+		'rA'; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: 
+		No qualifying bean of type 'Radius' available: expected single matching bean 
+		but found 2: rad,rad2 In case of byType autowiring mode, bean id and reference 
+		name may be different. But there must be only one bean of a type. It internally 
+		uses setter injection. <bean id="b1" class="org.sssit.B"></bean> <bean id="a" 
+		class="org.sssit.A" autowire="byType"></bean> In this case, it works fine 
+		because you have created an instance of B type. It doesn't matter that you 
+		have different bean name than reference name. But, if you have multiple bean 
+		of one type, it will not work and throw exception. Let's see the code where 
+		are many bean of type B. <bean id="b1" class="org.sssit.B"></bean> <bean 
+		id="b2" class="org.sssit.B"></bean> <bean id="a" class="org.sssit.A" autowire="byName"></bean> 
+		In such case, it will throw exception. -->
+
+</beans>
