@@ -7,15 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ron.dao.EmployeeDao;
 import com.ron.model.Employee;
+import com.ron.service.EmployeeService;
 
 @Controller
 @RequestMapping("/emp")
 public class EmployeeController {
 
 	@Autowired
-	private EmployeeDao employee;
+	private EmployeeService employeeService;
 	/*
 	 * Spring will scan for a component that implements EmployeeDao Interface
 	 */
@@ -23,12 +23,12 @@ public class EmployeeController {
 	@RequestMapping("/list")
 	public String displayEmployees(Model model) {
 		// get employees from employeedao
-		List<Employee> employeeList = employee.getAllEmployees();
+		List<Employee> employeeList = employeeService.getEmployees();
 		// add employees to model
 		model.addAttribute("employees", employeeList);
 		return "listEmployees";
 	}
-	
+
 	@RequestMapping("/addEmployee")
 	public String addNewEmployee(Model model) {
 		Employee employee = new Employee();

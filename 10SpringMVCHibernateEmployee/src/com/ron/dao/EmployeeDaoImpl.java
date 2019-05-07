@@ -2,8 +2,6 @@ package com.ron.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -27,7 +25,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	@Transactional
 	public List<Employee> getAllEmployees() {
 		// TODO Auto-generated method stub
 		// get current hibernate session

@@ -1,0 +1,13 @@
+Problem - Server Tomcat v9.0 Server at localhost failed to start.
+
+1. https://stackoverflow.com/questions/13244233/server-tomcat-v7-0-server-at-localhost-failed-to-start-without-stack-trace-whi
+
+2. https://stackoverflow.com/questions/54290263/more-than-one-fragment-with-the-name-spring-web-was-found-this-is-not-legal-w
+
+3. https://www.websparrow.org/misc/server-tomcat-server-at-localhost-failed-to-start-in-eclipse
+last option - becus of multiple dependencies i.e. different versions of spring jars, this thing occurs, so add entry in web.xml after <display-name> add --> 	
+<absolute-ordering></absolute-ordering>
+
+====================================================================================================================================
+
+
