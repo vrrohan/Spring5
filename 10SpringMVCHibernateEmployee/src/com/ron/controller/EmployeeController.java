@@ -1,7 +1,6 @@
 package com.ron.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -102,7 +101,7 @@ public class EmployeeController {
 			HttpSession session) throws IOException {
 		// invalidate or destroy session if any
 		session.invalidate();
-		String pageToRedirect = "";
+		String pageToRedirect = "redirect:/";
 
 		// get admin login details like admin login & password
 		String adminLoginName = request.getParameter("username").toString().trim();
@@ -127,10 +126,6 @@ public class EmployeeController {
 				newSession.setAttribute("password", adminLoginPassword);
 				pageToRedirect = "redirect:/emp/list";
 			} else {
-				response.setContentType("text/html");
-				PrintWriter writer = response.getWriter();
-				writer.println("<html><head></head><body>	<script type=\"text/javascript\">\r\n"
-						+ "		alert(\"Admin need to login first\");\r\n" + "	</script></body></html>");
 				pageToRedirect = "redirect:/";
 			}
 		} catch (Exception exception) {

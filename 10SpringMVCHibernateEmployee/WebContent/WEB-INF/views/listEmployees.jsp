@@ -26,45 +26,51 @@
 	<p>
 		Session Id :
 		<%=session.getId()%></p>
+
 	<table>
-		<tr>
-			<th>Employee ID</th>
-			<th>Firstname</th>
-			<th>Lastname</th>
-			<th>Email</th>
-			<th>Designation</th>
-			<th>Modify Employee Data</th>
-		</tr>
-		<c:forEach var="employee" items="${employees}">
-			<!-- Construct update link for each employee with their IDs -->
-			<c:url var="updateLink" value="/emp/updateEmployeeForm">
-				<c:param name="employeeId" value="${employee.employeeId}"></c:param>
-			</c:url>
-
-			<!-- Construct delete link for each employee with their IDs -->
-			<c:url var="deleteLink" value="/emp/deleteEmployee">
-				<c:param name="employeeId" value="${employee.employeeId}"></c:param>
-			</c:url>
-
+		<thead>
 			<tr>
-				<td>${employee.employeeId}</td>
-				<td>${employee.firstname}</td>
-				<td>${employee.lastname}</td>
-				<td>${employee.email}</td>
-				<td>${employee.designation}</td>
-				<td><a href="${updateLink}">Update</a> or <a
-					href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this Employee ?'))) return false">Delete</a></td>
+				<th>Employee ID</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Email</th>
+				<th>Designation</th>
+				<th>Modify Employee Data</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach var="employee" items="${employees}">
+				<!-- Construct update link for each employee with their IDs -->
+				<c:url var="updateLink" value="/emp/updateEmployeeForm">
+					<c:param name="employeeId" value="${employee.employeeId}"></c:param>
+				</c:url>
+
+				<!-- Construct delete link for each employee with their IDs -->
+				<c:url var="deleteLink" value="/emp/deleteEmployee">
+					<c:param name="employeeId" value="${employee.employeeId}"></c:param>
+				</c:url>
+
+				<tr>
+					<td>${employee.employeeId}</td>
+					<td>${employee.firstname}</td>
+					<td>${employee.lastname}</td>
+					<td>${employee.email}</td>
+					<td>${employee.designation}</td>
+					<td><a href="${updateLink}">Update</a> or <a
+						href="${deleteLink}"
+						onclick="if (!(confirm('Are you sure you want to delete this Employee ?'))) return false">Delete</a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<br />
 	<br />
 	<input type="button" value="Add Customer"
 		onclick="window.location.href='addEmployeeForm'; return false;"
-		class="add-employee-button pure-button">
+		class="button">
 	<input type="button" value="Logout"
 		onclick="window.location.href='logoutAdmin'; return false;"
-		class="add-employee-button pure-button">
+		class="button">
 	<%
 		}
 	%>
