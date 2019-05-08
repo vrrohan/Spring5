@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>SpringMVC</display-name>
 	<welcome-file-list>
-		<welcome-file>mainPage.jsp</welcome-file>
+		<welcome-file>/WEB-INF/views/adminLogin.jsp</welcome-file>
 	</welcome-file-list>
 	<absolute-ordering></absolute-ordering>
 	<servlet>

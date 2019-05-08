@@ -37,4 +37,39 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employeeList;
 	}
 
+	@Override
+	public void saveEmployeeDetails(Employee employeeAddDetails) {
+		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.save(employeeAddDetails);
+	}
+
+	@Override
+	public void updateEmployeeDetails(Employee employeeUpdateDetails) {
+		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.saveOrUpdate(employeeUpdateDetails);
+	}
+
+	@Override
+	public Employee getEmployeeDetailsById(int employeeId) {
+		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		return currentSession.get(Employee.class, employeeId);
+	}
+
+	@Override
+	public boolean getAdminLoginDetails(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void deleteEmployeeDetails(int employeeIdToDelete) {
+		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<?> queryToDeleteEmployeeById = currentSession.createQuery("delete from Employee where employeeId=:empId").setParameter("empId", employeeIdToDelete);
+		queryToDeleteEmployeeById.executeUpdate();
+	}
+
 }

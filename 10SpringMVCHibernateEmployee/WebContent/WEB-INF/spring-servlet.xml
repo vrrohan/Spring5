@@ -63,8 +63,8 @@
 
 	<!-- Add support for reading web resources like css files, js , pdf, images 
 		etc -->
-	<!-- location = "" contains physical directory name & in mapping ** means 
-		url mapping ** to recurse sub-directories -->
+	<!-- location contains physical directory name & mapping means url mapping 
+		** to recurse sub-directories -->
 	<mvc:resources location="/resources/"
 		mapping="/resources/**"></mvc:resources>
 </beans>  

@@ -1,4 +1,4 @@
 
 <%
-	response.sendRedirect("emp/list");
+	response.sendRedirect("adminLogin.jsp");
 %>
