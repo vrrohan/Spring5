@@ -68,7 +68,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public void deleteEmployeeDetails(int employeeIdToDelete) {
 		// TODO Auto-generated method stub
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<?> queryToDeleteEmployeeById = currentSession.createQuery("delete from Employee where employeeId=:empId").setParameter("empId", employeeIdToDelete);
+		Query<?> queryToDeleteEmployeeById = currentSession.createQuery("delete from Employee where employeeId=:empIdToDelete").setParameter("empIdToDelete", employeeIdToDelete);
 		queryToDeleteEmployeeById.executeUpdate();
 	}
 

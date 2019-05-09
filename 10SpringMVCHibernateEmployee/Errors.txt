@@ -10,4 +10,7 @@ last option - becus of multiple dependencies i.e. different versions of spring j
 
 ====================================================================================================================================
 
+Bean creation Exception - https://www.baeldung.com/spring-beancreationexception
+
+====================================================================================================================================
 

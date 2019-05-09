@@ -18,6 +18,9 @@
 	<div class="form-style-6">
 		<form:form action="updateEmployee" method="POST"
 			modelAttribute="employee">
+
+			<form:hidden path="employeeId" />
+
 			<form:label path="firstname" type="text"></form:label>
 			<form:input path="firstname" placeholder="Your Firstname"></form:input>
 			<form:errors path="firstname" cssClass="errors"></form:errors>
